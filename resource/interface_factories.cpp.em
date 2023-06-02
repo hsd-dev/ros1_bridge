@@ -421,20 +421,20 @@ void ActionFactory_@(frm_)_@(to_)<
     @(field["ros" + frm]["name"])@(frm)_it != @(type.lower())@(frm).@(field["ros" + frm]["name"]).end() &&
     @(field["ros" + to]["name"])@(to)_it != @(type.lower())@(to).@(field["ros" + to]["name"]).end()
   ) {
-    auto & @(field["ros" + frm]["name"])@(frm) = *(@(field["ros" + frm]["name"])@(frm)_it++);
-    auto & @(field["ros" + to]["name"])@(to) = *(@(field["ros" + to]["name"])@(to)_it++);
+    auto & @(field["ros" + frm]["name"])@(frm)_ = *(@(field["ros" + frm]["name"])@(frm)_it++);
+    auto & @(field["ros" + to]["name"])@(to)_ = *(@(field["ros" + to]["name"])@(to)_it++);
 @[        else]@
-  auto & @(field["ros" + frm]["name"])@(frm) = @(type.lower())@(frm).@(field["ros" + frm]["name"]);
-  auto & @(field["ros" + to]["name"])@(to) = @(type.lower())@(to).@(field["ros" + to]["name"]);
+  auto & @(field["ros" + frm]["name"])@(frm)_ = @(type.lower())@(frm).@(field["ros" + frm]["name"]);
+  auto & @(field["ros" + to]["name"])@(to)_ = @(type.lower())@(to).@(field["ros" + to]["name"]);
 @[        end if]@
 @[      if field["basic"]]@
 @[        if field["ros2"]["type"].startswith("builtin_interfaces") ]@
-    ros1_bridge::convert_@(frm)_to_@(to)(@(field["ros" + frm]["name"])@(frm), @(field["ros" + to]["name"])@(to));
+    ros1_bridge::convert_@(frm)_to_@(to)(@(field["ros" + frm]["name"])@(frm)_, @(field["ros" + to]["name"])@(to)_);
 @[        else]@
-    @(field["ros" + to]["name"])@(to) = @(field["ros" + frm]["name"])@(frm);
+    @(field["ros" + to]["name"])@(to)_ = @(field["ros" + frm]["name"])@(frm)_;
 @[        end if]@
 @[      else]@
-    Factory<@(field["ros1"]["cpptype"]),@(field["ros2"]["cpptype"])>::convert_@(frm)_to_@(to)(@(field["ros" + frm]["name"])@(frm), @(field["ros" + to]["name"])@(to));
+    Factory<@(field["ros1"]["cpptype"]),@(field["ros2"]["cpptype"])>::convert_@(frm)_to_@(to)(@(field["ros" + frm]["name"])@(frm)_, @(field["ros" + to]["name"])@(to)_);
 @[end if]@
 @[        if field["array"]]@
   }
